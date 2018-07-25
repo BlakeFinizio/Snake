@@ -4,11 +4,13 @@
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import pygame
+import random
 #Initialize pygame
 pygame.init()
 
 white = [255,255,255]
 red= [255,0,0]
+green = [0,255,0]
 
 width = 700
 height = 600                              #Width  Height 
@@ -21,6 +23,8 @@ leadX = width / 2
 leadY = height / 2
 cubeSizeX = 15
 cubeSizeY = 15
+appleLocationX = random.randrange(0,width - cubeSizeX)
+appleLocationY = random.randrange(0,height - cubeSizeY)
 FPS = 10
 leadXChange = 0
 leadYChange = 0
@@ -52,6 +56,7 @@ while not gameExit:
                         
     gameDisplay.fill(white)
     pygame.draw.rect(gameDisplay, red, [leadX,leadY,cubeSizeX,cubeSizeY])
+    pygame.draw.rect(gameDisplay, green, [appleLocationX, appleLocationY,cubeSizeX, cubeSizeY])
     pygame.display.update()
     # specify fps
     clock.tick(FPS)
