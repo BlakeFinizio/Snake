@@ -13,16 +13,46 @@ red= [255,0,0]
 #Game display                        #  |   |    
 gameDisplay = pygame.display.set_mode((500,400))
 pygame.display.set_caption("Cubes")
-
+clock = pygame.time.Clock() 
 gameExit = False
+leadX = 250
+leadY = 200
+
+leadXChange = 0
+leadYChange = 0
 while not gameExit:
     for event in pygame.event.get():
         print(event)
         if event.type == pygame.QUIT:
             gameExit = True
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                leadXChange = leadXChange - 15
+            if event.key == pygame.K_RIGHT:
+                leadXChange = leadXChange + 15
+            if event.key == pygame.K_UP:
+                leadYChange = leadYChange - 15
+            if event.key ==  pygame.K_DOWN:
+                leadYChange = leadYChange + 15
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_DOWN or event.key == pygame.K_UP:
+                leadYChange = 0
+            elif  event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                leadXChange = 0
+            
+    leadX = leadX + leadXChange
+    leadY = leadY + leadYChange
+
+                    
+                        
     gameDisplay.fill(white)
-    pygame.draw.rect(gameDisplay, red, [205xc0,200,15,15])
+    pygame.draw.rect(gameDisplay, red, [leadX,leadY,15,15])
     pygame.display.update()
+    # specify fps
+    clock.tick(10)
+          
+
+
 
 
 
