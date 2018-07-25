@@ -39,35 +39,18 @@ while not gameExit:
                 leadYChange = 0
             elif  event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 leadXChange = 0
-            
+
     leadX = leadX + leadXChange
     leadY = leadY + leadYChange
 
-                    
+    if leadX < 0 or leadX>500 or leadY <0 or leadY>400:
+        gameExit = True
                         
     gameDisplay.fill(white)
     pygame.draw.rect(gameDisplay, red, [leadX,leadY,15,15])
     pygame.display.update()
     # specify fps
     clock.tick(10)
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #Un-Initializes Pygame
 pygame.quit()
