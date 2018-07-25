@@ -9,15 +9,19 @@ pygame.init()
 
 white = [255,255,255]
 red= [255,0,0]
-                                    #Width  Height 
+
+width = 700
+height = 600                              #Width  Height 
 #Game display                        #  |   |    
-gameDisplay = pygame.display.set_mode((500,400))
+gameDisplay = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Cubes")
 clock = pygame.time.Clock() 
 gameExit = False
-leadX = 250
-leadY = 200
-
+leadX = width / 2
+leadY = height / 2
+cubeSizeX = 15
+cubeSizeY = 15
+FPS = 10
 leadXChange = 0
 leadYChange = 0
 while not gameExit:
@@ -27,13 +31,13 @@ while not gameExit:
             gameExit = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                leadXChange = leadXChange - 15
+                leadXChange = leadXChange - cubeSizeX
             if event.key == pygame.K_RIGHT:
-                leadXChange = leadXChange + 15
+                leadXChange = leadXChange + cubeSizeX
             if event.key == pygame.K_UP:
-                leadYChange = leadYChange - 15
+                leadYChange = leadYChange - cubeSizeY
             if event.key ==  pygame.K_DOWN:
-                leadYChange = leadYChange + 15
+                leadYChange = leadYChange + cubeSizeY
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN or event.key == pygame.K_UP:
                 leadYChange = 0
@@ -43,14 +47,14 @@ while not gameExit:
     leadX = leadX + leadXChange
     leadY = leadY + leadYChange
 
-    if leadX < 0 or leadX>500 or leadY <0 or leadY>400:
+    if leadX < 0 or leadX>width or leadY <0 or leadY>height:
         gameExit = True
                         
     gameDisplay.fill(white)
-    pygame.draw.rect(gameDisplay, red, [leadX,leadY,15,15])
+    pygame.draw.rect(gameDisplay, red, [leadX,leadY,cubeSizeX,cubeSizeY])
     pygame.display.update()
     # specify fps
-    clock.tick(10)
+    clock.tick(FPS)
 
 #Un-Initializes Pygame
 pygame.quit()
