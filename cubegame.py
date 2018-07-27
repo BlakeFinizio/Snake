@@ -23,8 +23,6 @@ clock = pygame.time.Clock()
 
 cubeSizeX = 10
 cubeSizeY = 10
-appleLocationX = random.randrange(0,width - cubeSizeX)
-appleLocationY = random.randrange(0,height - cubeSizeY)
 FPS = 20
 
 font = pygame.font.SysFont(None,35)
@@ -36,8 +34,11 @@ def gameLoop():
 	leadY = height / 2
 	leadXChange = 0
 	leadYChange = 0
+	appleLocationX = random.randrange(0,width - cubeSizeX,cubeSizeX)
+	appleLocationY = random.randrange(0,height - cubeSizeY,cubeSizeY)
 	gameOver = False
 	gameExit = False
+	
 	while not gameExit:
 		while gameOver:
 			gameDisplay.fill(black)
@@ -52,7 +53,7 @@ def gameLoop():
 					elif event.key == pygame.K_c:
 						gameLoop()
 		for event in pygame.event.get():
-			print(event)
+			#print(event)
 			if event.type == pygame.QUIT:
 				gameExit = True
 			if event.type == pygame.KEYDOWN:
@@ -75,6 +76,10 @@ def gameLoop():
 
 		if leadX < 0 or leadX>=width or leadY < 0 or leadY >= height:
 			gameOver = True
+		# detect colision between apple and snake
+		if leadX == appleLocationX and leadY == appleLocationY:
+			appleLocationX = random.randrange(0,width - cubeSizeX,cubeSizeX)
+			appleLocationY = random.randrange(0,height - cubeSizeY,cubeSizeY)
 
 		gameDisplay.fill(white)
 		pygame.draw.rect(gameDisplay, red, [leadX,leadY,cubeSizeX,cubeSizeY])
